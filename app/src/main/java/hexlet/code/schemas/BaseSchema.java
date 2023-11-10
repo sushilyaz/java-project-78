@@ -13,6 +13,11 @@ public class BaseSchema {
         req.put(key, descPredic);
     }
 
+    /**
+     *
+     * @param element from test
+     * @return boolean value
+     */
     public boolean isValid(Object element) {
         List<String> keys = new ArrayList<>(req.keySet());
         for (String key : keys) {
