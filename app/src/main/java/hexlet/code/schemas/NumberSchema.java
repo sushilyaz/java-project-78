@@ -1,6 +1,6 @@
 package hexlet.code.schemas;
 
-public class NumberSchema extends BaseSchema{
+public class NumberSchema extends BaseSchema {
     private boolean req = false;
     private boolean pos = false;
     private boolean rangeX = false;
@@ -23,17 +23,24 @@ public class NumberSchema extends BaseSchema{
         this.end = finish;
         return this;
     }
+
     @Override
     public boolean isValid(Object validationElement) {
         if (validationElement == null || validationElement instanceof Integer) {
             if (req) {
-                if (validationElement == null) return false;
+                if (validationElement == null) {
+                    return false;
+                }
             }
             if (pos) {
-                if (!(validationElement == null || (Integer) validationElement > 0)) return false;
+                if (!(validationElement == null || (Integer) validationElement > 0)) {
+                    return false;
+                }
             }
             if (rangeX) {
-                if ((Integer) validationElement < begin || (Integer) validationElement > end) return false;
+                if ((Integer) validationElement < begin || (Integer) validationElement > end) {
+                    return false;
+                }
             }
             return true;
         }

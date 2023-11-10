@@ -3,11 +3,12 @@ package hexlet.code.schemas;
 import java.util.ArrayList;
 import java.util.List;
 
-public class StringSchema extends BaseSchema{
+public class StringSchema extends BaseSchema {
     private boolean req = false;
     private int minL = 0;
 
     private List<String> subs = new ArrayList<>();
+
     public StringSchema required() {
         this.req = true;
         return this;
@@ -22,6 +23,7 @@ public class StringSchema extends BaseSchema{
         this.subs.add(substr);
         return this;
     }
+
     @Override
     public boolean isValid(Object validationElement) {
         if (validationElement == null || validationElement instanceof String) {
@@ -37,7 +39,9 @@ public class StringSchema extends BaseSchema{
             }
             if (!subs.isEmpty()) {
                 for (String some : subs) {
-                    if (!((String) validationElement).contains(some)) return false;
+                    if (!((String) validationElement).contains(some)) {
+                        return false;
+                    }
                 }
             }
             return true;
@@ -45,4 +49,3 @@ public class StringSchema extends BaseSchema{
         return false;
     }
 }
-// добавить return this
