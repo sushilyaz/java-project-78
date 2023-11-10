@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 
-public class MapSchema extends BaseSchema {
+public final class MapSchema extends BaseSchema {
     private boolean req = false;
     private boolean size = false;
     private int n = 0;
