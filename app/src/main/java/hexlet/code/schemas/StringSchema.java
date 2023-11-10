@@ -3,24 +3,26 @@ package hexlet.code.schemas;
 import java.util.ArrayList;
 import java.util.List;
 
-public class StringSchema {
+public class StringSchema extends BaseSchema{
     private boolean req = false;
     private int minL = 0;
 
     private List<String> subs = new ArrayList<>();
-
-    public void required() {
-        req = true;
+    public StringSchema required() {
+        this.req = true;
+        return this;
     }
 
-    public void minLength(int n) {
-        minL = n;
+    public StringSchema minLength(int n) {
+        this.minL = n;
+        return this;
     }
 
-    public void contains(String substr) {
-        subs.add(substr);
+    public StringSchema contains(String substr) {
+        this.subs.add(substr);
+        return this;
     }
-
+    @Override
     public boolean isValid(Object validationElement) {
         if (validationElement == null || validationElement instanceof String) {
             if (req) {
@@ -43,3 +45,4 @@ public class StringSchema {
         return false;
     }
 }
+// добавить return this
