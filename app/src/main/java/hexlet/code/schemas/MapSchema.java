@@ -10,7 +10,7 @@ public class MapSchema extends BaseSchema {
     }
 
     public MapSchema required() {
-        Predicate<Object> requiredPredicate = map -> map instanceof Map<?,?>;
+        Predicate<Object> requiredPredicate = map -> map instanceof Map<?, ?>;
         modifySchema("requiredMap", requiredPredicate);
         return this;
     }
@@ -20,6 +20,7 @@ public class MapSchema extends BaseSchema {
         modifySchema("sizeofMap", sizeofPredicate);
         return this;
     }
+
     public MapSchema shape(Map<String, BaseSchema> schemas) {
         Predicate<Object> shapePredicate = map -> map == null || map instanceof Map && schemas.entrySet().stream()
                 .allMatch(schema -> schema.getValue().isValid(((Map<?, ?>) map).get(schema.getKey())));
