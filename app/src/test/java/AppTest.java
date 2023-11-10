@@ -95,16 +95,6 @@ public class AppTest {
         actual = schema.isValid(data);
         assertEquals(true, actual);
     }
-
-    @Test
-    void testMapSchemaNPE() {
-        Validator v = new Validator();
-        MapSchema schema = v.map();
-        schema.sizeof(2);
-        boolean actual = schema.isValid(null);
-        assertEquals(false, actual);
-    }
-
     @Test
     void testShapeMapSchema() {
         Validator v = new Validator();

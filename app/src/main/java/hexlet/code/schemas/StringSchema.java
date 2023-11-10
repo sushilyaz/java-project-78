@@ -1,51 +1,28 @@
 package hexlet.code.schemas;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.function.Predicate;
 
-public final class StringSchema extends BaseSchema {
-    private boolean req = false;
-    private int minL = 0;
-
-    private List<String> subs = new ArrayList<>();
+public class StringSchema extends BaseSchema {
+    public StringSchema() {
+        Predicate<Object> predicateInit = s -> s == null || s instanceof String;
+        modifySchema("Init", predicateInit);
+    }
 
     public StringSchema required() {
-        this.req = true;
+        Predicate<Object> predicateRequired = s ->  s instanceof String && !((String) s).isEmpty();
+        modifySchema("requiredString", predicateRequired);
         return this;
     }
 
-    public StringSchema minLength(int n) {
-        this.minL = n;
+    public StringSchema minLength(int length) {
+        Predicate<Object> predicateMinLength = s -> s == null || s instanceof String && ((String) s).length() >= length;
+        modifySchema("minLengthString", predicateMinLength);
         return this;
     }
 
-    public StringSchema contains(String substr) {
-        this.subs.add(substr);
+    public StringSchema contains(String str) {
+        Predicate<Object> predicateContains = s -> s == null || s instanceof String && ((String) s).contains(str);
+        modifySchema("containsString", predicateContains);
         return this;
-    }
-
-    @Override
-    public boolean isValid(Object validationElement) {
-        if (validationElement == null || validationElement instanceof String) {
-            if (req) {
-                if (validationElement == null || validationElement.equals("")) {
-                    return false;
-                }
-            }
-            if (validationElement != null) {
-                if ((((String) validationElement).length() < minL)) {
-                    return false;
-                }
-            }
-            if (!subs.isEmpty()) {
-                for (String some : subs) {
-                    if (!((String) validationElement).contains(some)) {
-                        return false;
-                    }
-                }
-            }
-            return true;
-        }
-        return false;
     }
 }
